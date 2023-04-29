@@ -4,15 +4,13 @@ export const FilmList = ({ films }) => {
   const location = useLocation();
   return (
     <ul>
-      {films.length
-        ? films.map(film => (
-            <li key={film.id}>
-              <Link to={`/movies/${film.id}`} state={{ from: location }}>
-                {film.title}
-              </Link>
-            </li>
-          ))
-        : 'NO FILMS'}
+      {films.map(film => (
+        <li key={film.id}>
+          <Link to={`/movies/${film.id}`} state={{ from: location }}>
+            {film.title}
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 };

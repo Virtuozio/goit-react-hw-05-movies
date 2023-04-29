@@ -31,8 +31,11 @@ const Movies = () => {
 
   const updateQueryString = e => {
     e.preventDefault();
+    const form = e.currentTarget;
     const nextParams = query !== '' ? { query } : {};
     setSearchParams(nextParams);
+    e.target.reset();
+    form.reset();
   };
   const handleChange = e => {
     setQuery(e.target.value);
