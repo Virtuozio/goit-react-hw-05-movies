@@ -1,18 +1,18 @@
-import { getTrendingFilms } from 'fakeAPI';
+import { getTrendingFilms } from 'MovieAPI';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link, useLocation } from 'react-router-dom';
+import { FilmList } from 'components/FilmList';
 const Home = () => {
+  // const location = useLocation();
   const [films, setFilms] = useState([]);
   useEffect(() => {
     const fetchTrendingFilms = async () => {
       try {
         const trendingFilms = await getTrendingFilms();
-        console.log(trendingFilms);
         const sort = trendingFilms.map(({ title, name, id }) => ({
           id,
           title: title || name,
         }));
-        console.log(sort);
         setFilms(sort);
       } catch (error) {
         console.error(error);
@@ -24,13 +24,7 @@ const Home = () => {
   return (
     <main>
       <h1>Trending today</h1>
-      <ul>
-        {films.map(el => (
-          <li key={el.id}>
-            <Link to={`movies/${el.id}`}>{el.title}</Link>
-          </li>
-        ))}
-      </ul>
+      <FilmList films={films} />
     </main>
   );
 };

@@ -1,14 +1,12 @@
-import { Wrapper, Input, Icon } from './SearchBox.styled';
+// import { useState } from 'react';
+import { Wrapper, Input, Icon, Button } from './SearchBox.styled';
 
-export const SearchBox = ({ value, onChange }) => {
+export const SearchBox = ({ value, onChange, onSubmit }) => {
   return (
-    <Wrapper>
+    <Wrapper onSubmit={onSubmit}>
       <Icon />
-      <Input
-        type="text"
-        value={value}
-        onChange={e => onChange(e.target.value)}
-      />
+      <Input type="text" value={value} onChange={onChange} />
+      <Button type="submit" />
     </Wrapper>
   );
 };

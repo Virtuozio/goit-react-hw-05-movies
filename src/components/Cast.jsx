@@ -1,4 +1,4 @@
-import { getMovieCast } from 'fakeAPI';
+import { getMovieCast } from 'MovieAPI';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 

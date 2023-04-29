@@ -1,4 +1,4 @@
-import { getMovieReviews } from 'fakeAPI';
+import { getMovieReviews } from 'MovieAPI';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ const Reviews = () => {
   }, [id]);
   return (
     <section>
-      {reviews
+      {reviews.length
         ? reviews.map(review => (
             <li key={review.id}>
               <b>Author: {review.author}</b>

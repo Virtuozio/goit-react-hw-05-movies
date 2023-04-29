@@ -2,22 +2,21 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { FilmList } from '../components/FilmList';
 import { SearchBox } from '../components/SearchBox';
-import { getMoviesByName } from '../fakeAPI';
+import { getMoviesByName } from '../MovieAPI';
 
 const Movies = () => {
   const [films, setFilms] = useState([]);
+  const [query, setQuery] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const filmName = searchParams.get('query') ?? '';
   useEffect(() => {
     const fetchFilmsBySearch = async query => {
       try {
         const films = await getMoviesByName(query);
-        console.log(films);
         const sort = films.map(({ title, id }) => ({
           id,
           title,
         }));
-        console.log(sort);
         setFilms(sort);
       } catch (error) {
         console.error(error);
@@ -30,14 +29,22 @@ const Movies = () => {
     film.title.toLowerCase().includes(filmName.toLowerCase())
   );
 
-  const updateQueryString = query => {
+  const updateQueryString = e => {
+    e.preventDefault();
     const nextParams = query !== '' ? { query } : {};
     setSearchParams(nextParams);
+  };
+  const handleChange = e => {
+    setQuery(e.target.value);
   };
 
   return (
     <main>
-      <SearchBox value={filmName} onChange={updateQueryString} />
+      <SearchBox
+        value={query}
+        onChange={handleChange}
+        onSubmit={updateQueryString}
+      />
       <FilmList films={visibleFilms} />
     </main>
   );

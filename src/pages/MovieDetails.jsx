@@ -2,13 +2,13 @@ import { Suspense, useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { useParams, useLocation } from 'react-router-dom';
 import { BackLink } from '../components/BackLink';
-import { getMoviesById } from '../fakeAPI';
+import { getMoviesById } from '../MovieAPI';
 
 const MovieDetails = () => {
   const [film, setFilm] = useState({});
   const { id } = useParams();
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/';
+  const backLinkHref = location.state?.from ?? '/movies';
   useEffect(() => {
     const fetchTrendingFilms = async id => {
       try {
@@ -39,6 +39,8 @@ const MovieDetails = () => {
             : 'https://via.placeholder.com/100x150.png?text=No+Image'
         }
         alt={film.title}
+        width="300"
+        style={{ display: 'flex' }}
       />
       <div>
         <h2>
